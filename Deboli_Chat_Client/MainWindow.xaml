@@ -1,0 +1,181 @@
+﻿<Window x:Class="Deboli_Chat_Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Deboli_Chat_Client"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow"
+        Title="Login"
+        Height="640"
+        Width="360">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+ 
+        <!-- Image Login -->
+        <Image
+            Source="/Image/wallaper-login.png"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            />
+
+        <Label
+            Content="Login Chat"
+            FontSize="28"
+            FontFamily="Segoe UI Black"
+            HorizontalAlignment="Center"
+            Grid.Row="2"
+            VerticalAlignment="Center"
+            Foreground="#536DFE"
+            Grid.ColumnSpan="2"
+            />
+
+        <!-- Username -->
+        <TextBox
+            x:Name="Txt_Username"
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Height="23" 
+            Margin="0,40,0,0" 
+            Grid.Row="3" 
+            TextWrapping="NoWrap" 
+            Text="Nome utente"
+            VerticalAlignment="Top" 
+            Width="200"
+            Background="{x:Null}"
+            BorderThickness="0"
+            Grid.ColumnSpan="2" 
+            GotFocus="Txt_Username_GotFocus" 
+            LostFocus="Txt_Username_LostFocus"
+             Foreground="Gray"
+            />
+
+        <Rectangle
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Height="1" 
+            Margin="0,63,0,0" 
+            Grid.Row="3" 
+            Stroke="#536DFE" 
+            Width="200"
+            Grid.ColumnSpan="2"
+            />
+
+        <!-- Indirizzo IP -->
+        <TextBox
+            x:Name="Txt_IpAddress"
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Height="23" 
+            Margin="0,70,0,0" 
+            Grid.Row="3" 
+            TextWrapping="NoWrap" 
+            Text="Indirizzo IP"
+            VerticalAlignment="Top" 
+            Width="200"
+            Background="{x:Null}"
+            BorderThickness="0"
+            Grid.ColumnSpan="2"
+            GotFocus="Txt_IpAddress_GotFocus"
+            LostFocus="Txt_IpAddress_LostFocus"
+            Foreground="Gray"
+            />
+
+        <Rectangle
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Height="1" 
+            Margin="0,93,0,0"
+            Stroke="#536DFE" 
+            Width="200"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            />
+        
+        <!-- Numero porta -->
+        <TextBox
+            x:Name="Txt_porta"
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Height="23" 
+            Margin="0,100,0,0" 
+            Grid.Row="3" 
+            TextWrapping="NoWrap" 
+            Text="Numero porta"
+            VerticalAlignment="Top" 
+            Width="200"
+            Background="{x:Null}"
+            BorderThickness="0"
+            Grid.ColumnSpan="2"
+            GotFocus="Txt_porta_GotFocus"
+            LostFocus="Txt_porta_LostFocus"
+            Foreground="Gray"
+            />
+
+        <Rectangle
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Height="1" 
+            Margin="0,123,0,53"
+            Stroke="#536DFE" 
+            Width="200"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            />
+        
+        <!-- Checkbox -->
+        <CheckBox
+            x:Name="Chk_DefaultValue"
+            Content="Indirizzo IP e porta di default"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,20"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Bottom" Checked="Chk_DefaultValue_Checked" Unchecked="Chk_DefaultValue_Unchecked"
+            />
+
+        <!-- Connetti e Registrati-->
+        <Button
+            x:Name="Btn_Registrati"
+            Content="Registrati"
+            HorizontalAlignment="Right"
+            Margin="0,0,20,0"
+            Grid.Row="4"
+            VerticalAlignment="Top"
+            Width="100"
+            BorderThickness="0"
+            Padding="10"
+            Grid.Column="0"
+            Background="#536DFE"
+            Foreground="White"
+            />
+
+        <Button
+            x:Name="Btn_Connetti"
+            Content="Connetti"
+            HorizontalAlignment="Left"
+            Margin="20,0,0,0"
+            Grid.Row="4"
+            VerticalAlignment="Top"
+            Width="100"
+            BorderThickness="0"
+            Padding="10"
+            Grid.Column="1"
+            Background="#536DFE"
+            Foreground="White" Click="Btn_Connetti_Click"
+            />
+    </Grid>
+</Window>

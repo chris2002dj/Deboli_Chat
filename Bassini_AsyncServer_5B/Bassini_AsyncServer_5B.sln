@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bassini_AsyncServer_5B", "Bassini_AsyncServer_5B\Bassini_AsyncServer_5B.csproj", "{765CC45F-4916-40FE-AE1E-2D8667F3F69D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bassini_AsyncSocketLib", "Bassini_AsyncSocketLib\Bassini_AsyncSocketLib.csproj", "{4693F61B-DEAA-4DCB-9845-B0E2E06D199F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{765CC45F-4916-40FE-AE1E-2D8667F3F69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765CC45F-4916-40FE-AE1E-2D8667F3F69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765CC45F-4916-40FE-AE1E-2D8667F3F69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765CC45F-4916-40FE-AE1E-2D8667F3F69D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4693F61B-DEAA-4DCB-9845-B0E2E06D199F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4693F61B-DEAA-4DCB-9845-B0E2E06D199F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4693F61B-DEAA-4DCB-9845-B0E2E06D199F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4693F61B-DEAA-4DCB-9845-B0E2E06D199F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E97DC88-8816-4592-A15F-0FD90348E811}
+	EndGlobalSection
+EndGlobal
