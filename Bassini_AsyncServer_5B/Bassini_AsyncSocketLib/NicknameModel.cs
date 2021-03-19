@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bassini_AsyncSocketLib
 {
-    public class NicknameModel
-    {
+    public class NicknameModel {
         public string Nickname { get; set; }
         public TcpClient Client { get; set; }
     }

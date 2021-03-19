@@ -12,30 +12,28 @@ namespace Bassini_AsyncSocketLib
 {
     public class AsyncSocketServer
     {
+        // Inizializzazione delle variabili
         IPAddress mIP;
         int mPort;
         TcpListener mServer;
         List<NicknameModel> mClients;
         
-        public AsyncSocketServer()
-        {
+        public AsyncSocketServer() {
             mClients = new List<NicknameModel>();
         }
 
         /// <summary>
-        /// 
+        /// Metodo che mette in ascolto il server
         /// </summary>
         /// <param name="ipaddr"></param>
         /// <param name="port"></param>
-        public async void InAscolto(IPAddress ipaddr = null, int port = 23000)
-        {
-            //controlli generali
-            if (ipaddr == null)
-            {
+        public async void InAscolto(IPAddress ipaddr = null, int port = 23000) {
+            // Controlli generali
+            if (ipaddr == null) {
                 ipaddr = IPAddress.Any;
             }
-            if (port < 0 || port > 65535)
-            {
+
+            if (port < 0 || port > 65535) {
                 port = 23000;
             }
 
@@ -43,34 +41,26 @@ namespace Bassini_AsyncSocketLib
             mPort = port;
 
             mServer = new TcpListener(mIP, mPort);
-
+            mServer.Start();
             Console.WriteLine("Server in ascolto su IP: {0} - Porta: {1}", mIP.ToString(), mPort.ToString());
 
-            mServer.Start();
-
-            Console.WriteLine("Server avviato.");
-            while (true)
-            {
+            while (true) {
                 TcpClient client = await mServer.AcceptTcpClientAsync();
-
                 RegistraClient(client);
-
                 //Console.WriteLine("Client Connessi: {0}. Client Connesso: {1}", mClients.Count, client.Client.RemoteEndPoint);
-
                 RiceviMessaggio(client);
             }
         }
 
         /// <summary>
-        /// 
+        /// Metodo che registra gli utenti connessi al server
         /// </summary>
         /// <param name="client"></param>
-        public async void RegistraClient(TcpClient client)
-        {
+        public async void RegistraClient(TcpClient client) {
             NetworkStream stream = null;
             StreamReader reader = null;
-            try
-            {
+
+            try {
                 stream = client.GetStream();
                 reader = new StreamReader(stream);
                 char[] buff = new char[512];
@@ -78,11 +68,10 @@ namespace Bassini_AsyncSocketLib
 
                 Console.WriteLine("In attesa di un nickname");
 
-                //ricezione nickname asincrono
+                // Ricezione nickname asincrono
                 nBytes = await reader.ReadAsync(buff, 0, buff.Length);
                 string recvText = new string(buff);
                 Console.WriteLine("N° byte: {0}. Nickname: {1}", nBytes, recvText);
-
 
                 NicknameModel newClient = new NicknameModel();
                 newClient.Nickname = recvText;
@@ -90,34 +79,29 @@ namespace Bassini_AsyncSocketLib
 
                 mClients.Add(newClient);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Console.WriteLine("Errore: " + ex.Message);
             }
         }
 
         /// <summary>
-        /// 
+        /// Metodo che permette di ricevere al server un meessaggio da parte di un client
         /// </summary>
         /// <param name="client"></param>
-        public async void RiceviMessaggio(TcpClient client)
-        {
+        public async void RiceviMessaggio(TcpClient client) {
             NetworkStream stream = null;
             StreamReader reader = null;
-            try
-            {
+            try {
                 stream = client.GetStream();
                 reader = new StreamReader(stream);
                 char[] buff = new char[512];
                 int nBytes = 0;
-                while (true)
-                {
+                while (true) {
                     Console.WriteLine("In attesa di un messaggio");
 
                     // Ricezione messaggio asincrono
                     nBytes = await reader.ReadAsync(buff, 0, buff.Length);
-                    if (nBytes == 0)
-                    {
+                    if (nBytes == 0) {
                         RimuoviClient(client);
                         Console.WriteLine("Client disconnesso");
                         break;
@@ -128,21 +112,18 @@ namespace Bassini_AsyncSocketLib
                 }
 
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Console.WriteLine("Errore: " + ex.Message);
             }
         }
 
         /// <summary>
-        /// 
+        /// Metodo che permette la rimozione di un client connesso
         /// </summary>
         /// <param name="client"></param>
-        private void RimuoviClient(TcpClient client)
-        {
+        private void RimuoviClient(TcpClient client) {
             // Metodo Standard
-            foreach (NicknameModel elem in mClients)
-            {
+            foreach (NicknameModel elem in mClients) {
                 if (elem.Client == client) {
                     mClients.Remove(elem);
                 }
@@ -170,48 +151,35 @@ namespace Bassini_AsyncSocketLib
         }
 
         /// <summary>
-        /// 
+        /// Metodo che invia un messaggio a tutti i client connessi
         /// </summary>
         /// <param name="messaggio"></param>
-        public void InviaATutti(string messaggio)
-        {
-            try
-            {
-                foreach (NicknameModel client in mClients)
-                {
+        public void InviaATutti(string messaggio) {
+            try {
+                foreach (NicknameModel client in mClients) {
                     byte[] buff = Encoding.ASCII.GetBytes(messaggio);
                     client.Client.GetStream().WriteAsync(buff, 0, buff.Length);
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Console.WriteLine("Errore: " + ex.Message);
             }
         }
 
         /// <summary>
-        /// 
+        /// Metodo che disconnette il server
         /// </summary>
-        public void Disconnetti()
-        {
-            try
-            {
-                foreach (NicknameModel client in mClients)
-                {
+        public void Disconnetti() {
+            try {
+                foreach (NicknameModel client in mClients) {
                     client.Client.Close();
                     RimuoviClient(client.Client);
                 }
                 mServer.Stop();
-                
-                
             }
-            catch (Exception ex)
-            {
-
+            catch (Exception ex) {
                 Console.WriteLine("Errore: "+ ex.Message);
             }
-
         }
-
     }
 }
