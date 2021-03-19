@@ -16,7 +16,7 @@ namespace Bassini_AsyncSocketLib
         int mPort;
         TcpListener mServer;
         List<NicknameModel> mClients;
-
+        
         public AsyncSocketServer()
         {
             mClients = new List<NicknameModel>();
