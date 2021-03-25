@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Bassini_AsyncSocketLib;
 
 namespace Deboli_Chat_Client
 {
@@ -20,12 +21,13 @@ namespace Deboli_Chat_Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        public AsyncSocketClient client;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        // Controllo l'evento della TextBox (Txt_Username)
         // Username
         private void Txt_Username_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -100,26 +102,34 @@ namespace Deboli_Chat_Client
         private void Btn_Connetti_Click(object sender, RoutedEventArgs e)
         {
             // Controlli generali
-            if (Txt_Username.Text == "Nome utente")
-            {
+            if (Txt_Username.Text == "Nome utente") {
                 MessageBox.Show("Attenzione, devi inserire un nome utente", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Txt_Username.Focus();
                 return;
             }
 
-            if (Txt_IpAddress.Text == "Indirizzo IP")
-            {
+            if (Txt_IpAddress.Text == "Indirizzo IP") {
                 MessageBox.Show("Attenzione, devi inserire un indirizzo IP", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Txt_IpAddress.Focus();
                 return;
             }
 
-            if (Txt_porta.Text == "Numero porta")
-            {
+            if (Txt_porta.Text == "Numero porta") {
                 MessageBox.Show("Attenzione, devi inserire un numero di porta", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Txt_porta.Focus();
                 return;
             }
+
+            // Creazione istanza
+            client = new AsyncSocketClient();
+
+            // Passaggio dei parametri ai metodi
+            client.SetServerIPAddress(Txt_IpAddress.Text);
+            client.SetServerPort(Txt_porta.Text);
+
+            // Connessione al server
+            client.ConnettiAlServer();
+            client.Invia(Txt_Username.Text);
 
             Chat chat = new Chat();
             chat.Show();
